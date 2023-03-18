@@ -1,14 +1,18 @@
-import logging
+import logging, configparser
 from telethon.tl.functions.channels import JoinChannelRequest
 from telethon.sync import TelegramClient as UserClient
 from telethon.sessions import StringSession
 from simhash import Simhash
 from telethon import TelegramClient, events
 
-API_ID = "20036987"
-API_HASH = "b91bd8943ea55861655b2ece542855a4"
-BOT_TOKEN = "6148610901:AAE-E4BCaMIvqxlTcsIiAmD0tGFr1nGqS1Y"
-USER_SESSION_STRING = "1ApWapzMBu1awNIIvKVCQ7xxcRxrOHvB_0N9Rb7a-tg3dolA00uZ_2u00hPe-uU1j51Xgk7SqFxFpENE3ZD0lopUImtfV0TrNrQpUYtyw-bFCtBwK8jNl4JJgeUmKDJu7Wc3A3UNg2YlYM3nroa99v7AJYhmqn5-im0ujT5Du_tQSdvqXM_mdDi45ri2B7b-sYAE1dmIhN9Qi2PQptFKXceGcUd76PcK3cpWrsKBI939ug80J6pcUvrWLLurq0Z-YHbgmfauO6kJ2XdDNtnPg_pDCTm-8V59Kj1lVTkYp3cBtdJe-Nr8yafy9Bc6BIp_Lh9rOrMEeEFEV-QHdqRzca2hJOoje828="
+
+config = configparser.ConfigParser()
+config.read('config.ini')
+
+API_ID = config.get('DEFAULT', 'API_ID')
+API_HASH = config.get('DEFAULT', 'API_HASH')
+BOT_TOKEN = config.get('DEFAULT', 'BOT_TOKEN')
+USER_SESSION_STRING = config.get('DEFAULT', 'USER_SESSION_STRING')
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
