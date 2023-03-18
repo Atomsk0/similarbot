@@ -1,0 +1,1 @@
+This telegram bot accepts channel links and monitors their posts, filtering out similar messages and sending unique ones to a specified target channel. It is intended for helping with having multiple subscriptions to news channels which often post siilar information.
