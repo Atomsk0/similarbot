@@ -5,10 +5,10 @@ from telethon.sessions import StringSession
 from simhash import Simhash
 from telethon import TelegramClient, events
 
-API_ID = "your_api_id"
-API_HASH = "your_api_hash"
-BOT_TOKEN = "your_bot_token"
-USER_SESSION_STRING = "your_user_session_string"
+API_ID = "20036987"
+API_HASH = "b91bd8943ea55861655b2ece542855a4"
+BOT_TOKEN = "6148610901:AAE-E4BCaMIvqxlTcsIiAmD0tGFr1nGqS1Y"
+USER_SESSION_STRING = "1ApWapzMBu1awNIIvKVCQ7xxcRxrOHvB_0N9Rb7a-tg3dolA00uZ_2u00hPe-uU1j51Xgk7SqFxFpENE3ZD0lopUImtfV0TrNrQpUYtyw-bFCtBwK8jNl4JJgeUmKDJu7Wc3A3UNg2YlYM3nroa99v7AJYhmqn5-im0ujT5Du_tQSdvqXM_mdDi45ri2B7b-sYAE1dmIhN9Qi2PQptFKXceGcUd76PcK3cpWrsKBI939ug80J6pcUvrWLLurq0Z-YHbgmfauO6kJ2XdDNtnPg_pDCTm-8V59Kj1lVTkYp3cBtdJe-Nr8yafy9Bc6BIp_Lh9rOrMEeEFEV-QHdqRzca2hJOoje828="
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -21,7 +21,7 @@ user_client = UserClient(StringSession(USER_SESSION_STRING), api_id=API_ID, api_
 
 # The monitored channels and the target channel
 monitored_channels = set()
-target_channel = "@your_target_channel"
+target_channel = "@maxshkilnews"
 
 # A set to store Simhash values of previous messages
 simhash_set = set()
@@ -56,9 +56,8 @@ def simhash_similarity(simhash1, simhash2):
 
 @user_client.on(events.NewMessage())
 async def handle_channel_post(event):
-    print(f"Inside handle_channel_post function")
     if event.is_channel and event.chat.username and f"@{event.chat.username}" in monitored_channels:
-        message_text = event.text or event.caption
+        message_text = event.text or event.message.text
         if message_text:
             message_simhash = Simhash(message_text).value
 
@@ -69,6 +68,7 @@ async def handle_channel_post(event):
             simhash_set.add(message_simhash)
 
             await event.forward_to(target_channel)
+
 
 
 
